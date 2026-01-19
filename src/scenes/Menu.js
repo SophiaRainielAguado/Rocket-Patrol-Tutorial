@@ -10,7 +10,7 @@ class Menu extends Phaser.Scene{
         this.load.image("starfield", "./assets/starfield.png")
 
         //load spritesheet
-        this.load.spritesheet("explosion", "./assets.explosion.png", {
+        this.load.spritesheet("explosion", "./assets/explosion.png", {
             frameWidth: 64,
             frameHeight: 32,
             startFrame: 0,
@@ -21,7 +21,7 @@ class Menu extends Phaser.Scene{
     create(){
         // animation configuration
         this.anims.create({
-            ket: "explode",
+            key: "explode",
             frames: this.anims.generateFrameNumbers("explosion",
                 {start: 0, end: 9, first: 0}), frameRate: 30
         })
