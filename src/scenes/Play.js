@@ -4,6 +4,14 @@ class Play extends Phaser.Scene{
     }
 
     create(){
+        //Key Binds
+        // define keys
+        keyFIRE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F)
+        keyRESET = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R)
+        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT)
+        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT)
+
+
         // Background
         // Tile Sprite
         this.starfield = this.add.tileSprite(0, 0, 640, 480, "starfield") //places tile sprite
@@ -38,12 +46,21 @@ class Play extends Phaser.Scene{
             "spaceship", 0, 10).setOrigin(0, 0)
 
 
-        //Key Binds
-        // define keys
-        keyFIRE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F)
-        keyRESET = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R)
-        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT)
-        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT)
+        // Score
+        this.p1Score = 0 // initialize score
+
+        // display score
+        let scoreConfig = {
+            fontFamily: "Courier",
+            fontSize: "28px",
+            backgroundColor: "#F3B141",
+            color: "#843605",
+            alight: "right",
+            padding: {top: 5, bottom: 5},
+            fixedWidth: 100
+        }
+        this.scoreLeft = this.add.text(borderUISize + borderPadding, 
+            borderUISize + borderPadding*2, this.p1Score, scoreConfig)
     }
 
     update(){
@@ -87,5 +104,9 @@ class Play extends Phaser.Scene{
             ship.alpha = 1      // make ship visible again
             boom.destroy()      // remove explosion sprite
         })
+
+        // Score Managment
+        this.p1Score += ship.points         // add score
+        this.scoreLeft.text = this.p1Score  // update text display
     }
 }
