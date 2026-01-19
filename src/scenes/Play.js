@@ -67,7 +67,7 @@ class Play extends Phaser.Scene{
         this.gameOver = false       // GAME OVER Flag
 
         scoreConfig.fixedWidth = 0
-        this.clock = this.time.delayedCall(1000, () =>{
+        this.clock = this.time.delayedCall(60000, () =>{
             this.add.text(game.config.width/2, game.config.height/2, 
                 "GAME OVER", scoreConfig).setOrigin(0.5)
             this.add.text(game.config.width/2, game.config.height/2 + 64,
@@ -79,9 +79,15 @@ class Play extends Phaser.Scene{
     update(){
         this.starfield.tilePositionX -= 4   // moves 4 px evert frame
 
-        //GAME OVER Flag Functionality
+        //GAME OVER Functionality
+        // check key input for restart
+        if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyRESET)){
+            this.scene.restart()
+        }
+
+        //GAME OVER Flag
         if(!this.gameOver){
-            this.starfield.tilePositionX -= 1   // moves 4 px evert frame
+            this.starfield.tilePositionX -= 1   // moves 1 px evert frame
             this.p1Rocket.update()      // update Rocket
             this.ship01.update()        // update Spaceships (x3)
             this.ship02.update()
